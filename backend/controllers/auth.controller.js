@@ -16,10 +16,10 @@ export const login = async (req, res) => {
     generateTokenAndCookie(user._id, res);
 
     res.status(200).json({
-        _id: newUser._id,
-        fullName: newUser.fullName,
-        username: newUser.username,
-        profilePic: newUser.profilePic,
+        _id: user._id,
+        fullName: user.fullName,
+        username: user.username,
+        profilePic: user.profilePic,
       });
 
   }catch (error) {
@@ -81,6 +81,11 @@ export const signup = async (req, res) => {
 };
 
 export const logout = (req, res) => {
-  res.send("Logout");
-  console.log("Logout User");
+  try {
+    res.cookie('jwt', "", {maxAge:0})
+    res.status(200).json({ message: "Logged out successfully" });
+  } catch (error) {
+    console.log("Error in logout controller",error.message)
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 };
