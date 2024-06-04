@@ -24,7 +24,11 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:""
     }
-}, {timestamps:true})
+
+    //time at which messages were created
+},{timestamps:true} )
+
+// const Message = 
 
 const User = mongoose.model("User", userSchema);
 export default User
